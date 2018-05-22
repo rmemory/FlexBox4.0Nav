@@ -1,0 +1,118 @@
+html {
+	/* The box-sizing property defines how the width and height of an element are calculated: 
+	   should they include padding and borders, or not. And border-box means,
+	   The width and height properties (and min/max properties) includes content, padding and 
+	   border */
+	box-sizing: border-box;
+}
+
+/* By default box-sizing is not inherted, but this changes it so that everything
+   does inherit box-sizing */
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
+body {
+	font-family: sans-serif;
+	margin: 0;
+	
+	/* Sets a linear gradient as the background image. Define at least two colors (top to bottom) */
+	background-image: linear-gradient(260deg, #2376ae 0%, #c16ecf 100%);
+}
+
+/* Some defaults for the anchor tags */
+a {
+	color:white;
+	font-weight: 100;
+	letter-spacing: 2px;
+	text-decoration: none;
+	background:rgba(0,0,0,0.2);
+	padding:20px 5px;
+	display: inline-block;
+	width: 100%;
+	text-align: center;
+
+	transition:all 0.5s;
+}
+
+/* Add a shadow in the background when a user hovers over a link */
+a:hover {
+	background:rgba(0,0,0,0.3);
+}
+
+/* More defaults for the outer most element used in the body */
+.wrapper {
+	/* This constrains the width of the nav */
+	max-width: 1000px;
+	
+	/* margin 0 is a default of 0, and auto means the browser calculates a 
+	   margin. A block element with 'margin: 0 auto' will have the left and 
+	   right margins increased until it becomes centered along the y-axis of 
+	   the viewport. */
+	margin: 0 auto;
+	
+	/* Add a bit of padding around the nav bar */
+	padding:50px;
+}
+
+/* 
+ * Beginning of all Flex styling
+ */
+
+/* Flex Container. First, the ul, which will be the flex container */
+.flex-nav ul {
+	border:1px solid black;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	border: 10px solid red;
+	
+	display: flex; /* Causes flex items to render in a row */
+}
+
+/* Flex Items */
+.flex-nav li {
+	flex:3; /* all items will grow and shrink equally, but we'll
+			   make the social li's take less as shown below */
+}
+
+/* Make the social items slightly less than top li's */
+.flex-nav .social {
+	flex:1; /* The social items need less space */
+}
+
+/* Styling as the screen size changes, in the first case
+	 between 500 and 1000px */
+@media all and (max-width:1000px) {
+	.flex-nav ul {
+		flex-wrap: wrap; /* Without a flex-basis, no wrapping will occur. That said, because
+							we are using flex-basis (see the next entries), usage of wrap
+							does cause wrapping. Why not just use flex-direction: column rather
+							than flex-wrap here? Because we want the social icons to remain in 
+							a row. Which we accomplish with usage of flex-wrap and the usage of
+							flex-basis */
+	}
+
+	.flex-nav li {
+		flex: 1 1 50%; /* This flex-basis provides two columns of links because each item takes up
+						  50% the available width as per flex-basis. */
+	}
+	
+	.flex-nav .social {
+		flex: 1 1 20%; /* This flex-basis provides a single row because there are only five links,
+						  ie, each takes up 20% or 1/5 the available space. */
+	}
+}
+
+/* Styling for all screen sizes below 500px */
+@media all and (max-width:500px) {
+	/* Stack all li's into a single column, due to wrapping (still in effect), and usage of 100% for 
+	   each. That said, also note that the social icons are still in a row because it too is still 
+	   in effect from above */
+	/* lastly, note that the flex-grow and flex-shrink of 1 are still in force, and this only affects
+	   the flex-basis of 50% above. */
+	.flex-nav li {
+		flex-basis: 100%;
+	}
+}
+
